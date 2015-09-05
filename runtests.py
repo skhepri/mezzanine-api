@@ -6,6 +6,8 @@ import sys
 import os
 import subprocess
 
+import django
+
 
 PYTEST_ARGS = {
     'default': ['tests'],
@@ -17,6 +19,11 @@ FLAKE8_ARGS = ['mezzanine_api', 'tests', '--ignore=E501']
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.settings")
 
 sys.path.append(os.path.dirname(__file__))
+
+if (django.get_version() >= '1.7'):
+    from django.core.management import execute_from_command_line
+    django.setup()
+    execute_from_command_line(['', 'migrate', '--noinput', '--no-initial-data'])
 
 
 def exit_on_failure(ret, message=None):

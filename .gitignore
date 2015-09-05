@@ -6,3 +6,5 @@ dist/
 site/
 .idea/
 .tox/
+TODO
+*sqlite
